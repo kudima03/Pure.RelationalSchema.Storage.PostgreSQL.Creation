@@ -1,4 +1,4 @@
-# Pure.Template
+# Pure.RelationalSchema.Storage.PostgreSQL.Creation
 
 Project template for new **Pure** ecosystem NuGet libraries.
 
@@ -6,7 +6,7 @@ Project template for new **Pure** ecosystem NuGet libraries.
 
 ## Overview
 
-`Pure.Template` is the canonical starting point for new Pure ecosystem packages. It ships with a pre-configured project structure, `.editorconfig`, GitHub Actions workflows for build/test and NuGet publish, and standard `CODEOWNERS` and `CODE_OF_CONDUCT.md` files — so a new library can be bootstrapped consistently without manually copying configuration from another repo.
+`Pure.RelationalSchema.Storage.PostgreSQL.Creation` is the canonical starting point for new Pure ecosystem packages. It ships with a pre-configured project structure, `.editorconfig`, GitHub Actions workflows for build/test and NuGet publish, and standard `CODEOWNERS` and `CODE_OF_CONDUCT.md` files — so a new library can be bootstrapped consistently without manually copying configuration from another repo.
 
 ## What's included
 
