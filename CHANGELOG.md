@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Mark the package as AOT compatible (`IsAotCompatible` set to `true`); the AOT, trim and single-file analyzers now run on every target framework.
+
 ## [0.1.0-preview.0.1.0] - 2026-10-15
 
 ### Added
