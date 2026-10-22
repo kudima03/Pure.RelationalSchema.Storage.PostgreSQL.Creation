@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-preview.0.3.1] - 2026-10-22
+
+### Fixed
+
+- Reject foreign keys whose referencing or referenced table is not part of the schema: `PostgreSqlCreatedSchema` now throws an `ArgumentException` while building the creation script, before any SQL is executed, instead of failing only once the generated DDL reached PostgreSQL. Cross-schema foreign keys are not supported.
+
 ## [0.1.0-preview.0.3.0] - 2026-10-22
 
 ### Changed
