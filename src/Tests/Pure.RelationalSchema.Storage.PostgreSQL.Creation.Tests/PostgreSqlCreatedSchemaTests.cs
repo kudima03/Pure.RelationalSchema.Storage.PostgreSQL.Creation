@@ -1,11 +1,14 @@
+using System.Data;
 using Pure.Primitives.Bool;
 using Pure.Primitives.Number;
 using Pure.Primitives.Random.String;
+using Pure.Primitives.String.Operations;
 using Pure.RelationalSchema.Abstractions.Column;
 using Pure.RelationalSchema.Abstractions.ForeignKey;
 using Pure.RelationalSchema.Abstractions.Schema;
 using Pure.RelationalSchema.Abstractions.Table;
 using Pure.RelationalSchema.ColumnType;
+using Pure.RelationalSchema.HashCodes;
 using String = Pure.Primitives.String.String;
 
 namespace Pure.RelationalSchema.Storage.PostgreSQL.Creation.Tests;
@@ -315,6 +318,95 @@ public sealed record PostgreSqlCreatedSchemaTests : IClassFixture<DatabaseFixtur
                 new PostgreSqlCreatedSchema(schema, _fixture.Connection),
                 _fixture.Connection
             ).Name
+        );
+    }
+
+    [Fact]
+    public void ThrowsOnForeignKeyToTableOfAnotherSchema()
+    {
+        (ITable table, ITable otherSchemaTable) = TablePair();
+
+        ISchema schema = new Schema(
+            new RandomString(new UShort(20)),
+            [table],
+            [
+                new ForeignKey(
+                    table,
+                    table.Columns.Take(1),
+                    otherSchemaTable,
+                    otherSchemaTable.Columns.Take(1)
+                ),
+            ]
+        );
+
+        _ = Assert.Throws<ArgumentException>(() =>
+            new PostgreSqlCreatedSchema(schema, _fixture.Connection).Name
+        );
+        Assert.False(Exists(schema));
+    }
+
+    [Fact]
+    public void ThrowsOnForeignKeyFromTableOfAnotherSchema()
+    {
+        (ITable table, ITable otherSchemaTable) = TablePair();
+
+        ISchema schema = new Schema(
+            new RandomString(new UShort(20)),
+            [table],
+            [
+                new ForeignKey(
+                    otherSchemaTable,
+                    otherSchemaTable.Columns.Take(1),
+                    table,
+                    table.Columns.Take(1)
+                ),
+            ]
+        );
+
+        _ = Assert.Throws<ArgumentException>(() =>
+            new PostgreSqlCreatedSchema(schema, _fixture.Connection).Name
+        );
+        Assert.False(Exists(schema));
+    }
+
+    private bool Exists(ISchema schema)
+    {
+        IDbCommand command = _fixture.Connection.CreateCommand();
+        command.CommandText = $"""
+            SELECT EXISTS (
+                SELECT 1
+                FROM information_schema.schemata
+                WHERE schema_name = '{new HexString(
+                    new SchemaHash(schema)
+                ).TextValue[..63]}'
+            )
+            """;
+        return (bool)command.ExecuteScalar()!;
+    }
+
+    private static (ITable, ITable) TablePair()
+    {
+        IReadOnlyCollection<IColumn> columns1 =
+        [
+            new Column(new RandomString(new UShort(20)), new LongColumnType()),
+        ];
+
+        IReadOnlyCollection<IColumn> columns2 =
+        [
+            new Column(new RandomString(new UShort(20)), new LongColumnType()),
+        ];
+
+        return (
+            new Table(
+                new RandomString(new UShort(20)),
+                columns1,
+                [new Index(new True(), columns1)]
+            ),
+            new Table(
+                new RandomString(new UShort(20)),
+                columns2,
+                [new Index(new True(), columns2)]
+            )
         );
     }
 }
