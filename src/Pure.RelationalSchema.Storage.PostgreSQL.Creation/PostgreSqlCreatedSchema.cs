@@ -19,6 +19,13 @@ public sealed record PostgreSqlCreatedSchema : ISchema
         _schema = schema;
         _created = new Lazy<IBool>(() =>
         {
+            if (!new ForeignKeysWithinSchema(_schema).BoolValue)
+            {
+                throw new ArgumentException(
+                    "Foreign keys must reference tables of the same schema."
+                );
+            }
+
             IDbCommand command = connection.CreateCommand();
             IString schemaCreationScript = new SchemaCreationStatement(_schema);
             command.CommandText = schemaCreationScript.TextValue;

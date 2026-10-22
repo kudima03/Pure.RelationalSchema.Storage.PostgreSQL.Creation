@@ -25,7 +25,7 @@ This is the **schema creation (DDL)** package of the PostgreSQL storage for the 
 
 **Key relationships:**
 
-- `PostgreSqlCreatedSchema` wraps an `ISchema` and executes DDL (CREATE SCHEMA, CREATE TABLE, CREATE INDEX, ALTER TABLE … ADD CONSTRAINT) lazily via `SchemaCreationStatement` on first property access. All statements use `IF NOT EXISTS`.
+- `PostgreSqlCreatedSchema` wraps an `ISchema` and executes DDL (CREATE SCHEMA, CREATE TABLE, CREATE INDEX, ALTER TABLE … ADD CONSTRAINT) lazily via `SchemaCreationStatement` on first property access. All statements use `IF NOT EXISTS`. Before executing, `ForeignKeysWithinSchema` checks that every foreign key's referencing and referenced tables belong to the schema; cross-schema foreign keys are deliberately unsupported and throw `ArgumentException`.
 - The schema, table and column names in PostgreSQL are derived from hash codes (via `Pure.RelationalSchema.HashCodes`), trimmed to 63 hex characters by `TrimmedHash`, rather than the model names, to avoid length and character constraints.
 - All SQL statement builders (`SchemaCreationStatement`, `TableCreationStatement`, `TableCreationHeaderStatement`, `ColumnCreationStatement`, `PostgreSqlColumnTypeName`, `NotNullStatement`, `IndexCreationStatement`, `ForeignKeyCreationStatement`, `ForeignKeyStatement`, `AlterTableStatement`, `AddConstraintStatement`) are **internal** and compose SQL as `IString` values using `Pure.Primitives.String.Operations` combinators.
 

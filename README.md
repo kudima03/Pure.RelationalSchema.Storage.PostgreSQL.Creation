@@ -41,6 +41,8 @@ ISchema created = new PostgreSqlCreatedSchema(schema, connection);
 IEnumerable<ITable> tables = created.Tables;
 ```
 
+Foreign keys must stay within the schema: both the referencing and the referenced table must be among the schema's tables. A foreign key to or from a table of another schema is rejected with an `ArgumentException` on first access, before any SQL is executed.
+
 ## Naming convention
 
 Schema, table and column identifiers in PostgreSQL are not the model names. Each one is the first 63 hexadecimal characters of the corresponding hash from `Pure.RelationalSchema.HashCodes` (`SchemaHash`, `TableHash`, `ColumnHash`), which avoids PostgreSQL's identifier length limit and character restrictions.
