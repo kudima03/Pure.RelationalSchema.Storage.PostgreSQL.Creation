@@ -53,7 +53,7 @@ internal sealed record SchemaCreationStatement : IString
                 new JoinedString(
                     new ConcatenatedString(new NewLineString(), new NewLineString()),
                     _schema.ForeignKeys.Select(x => new ForeignKeyCreationStatement(
-                        x,
+                        new ForeignKeyWithinSchema(x, _schema),
                         new TrimmedHash(new HexString(new SchemaHash(_schema)))
                     ))
                 ),
