@@ -35,7 +35,7 @@ This is the **schema creation (DDL)** package of the PostgreSQL storage for the 
 
 **Multi-targeting:** net8.0, net9.0, net10.0. `IsAotCompatible` is `true` (AOT, trim and single-file analyzers run on every target).
 
-**Package validation:** `EnablePackageValidation = true`. There is no `PackageValidationBaselineVersion` until the first release is published; the nuget-publish workflow sets it afterwards. Breaking API changes fail the build once a baseline exists.
+**Package validation:** `EnablePackageValidation = true` with `PackageValidationBaselineVersion` currently `0.1.0-preview.0.3.0` (bumped after each release by the nuget-publish workflow). Breaking API changes against the baseline fail the build.
 
 **Publishing:** triggered by pushing a semver tag matching `*.*.*`. The tag name becomes the `PackageVersion`. Packages are published to both GitHub Packages and NuGet.org.
 
