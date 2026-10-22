@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-preview.0.3.0] - 2026-10-22
+
+### Changed
+
+- Bump `Pure.Primitives.Choices` from 1.2.2 to 1.3.0.
+- Bump `Pure.Primitives.String.Operations` from 1.5.1 to 1.6.0.
+- Bump `Pure.Primitives.Switches` from 1.1.3 to 1.2.0.
+- Bump `Pure.RelationalSchema` from 2.0.3 to 2.1.0.
+
 ## [0.1.0-preview.0.2.0] - 2026-10-22
 
 ### Changed
