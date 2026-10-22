@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-preview.0.2.0] - 2026-10-22
+
 ### Changed
 
+- Bump `Pure.Primitives` from 3.6.5 to 3.7.0.
 - Mark the package as AOT compatible (`IsAotCompatible` set to `true`); the AOT, trim and single-file analyzers now run on every target framework.
 
 ## [0.1.0-preview.0.1.0] - 2026-10-15
