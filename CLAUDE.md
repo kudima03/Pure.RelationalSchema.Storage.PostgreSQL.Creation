@@ -33,7 +33,7 @@ This is the **schema creation (DDL)** package of the PostgreSQL storage for the 
 
 **Testing:** Integration tests use `Testcontainers.PostgreSql` to spin up a real PostgreSQL instance. There are no unit tests with mocked databases. CI (`.github/workflows/build-and-test.yml`) runs mutation testing via `dotnet-stryker` at `Complete` level with a 59% break threshold and requires at least 83% line coverage (warning at 99%). CI also enforces `dotnet format` and `dotnet csharpier check .`.
 
-**Multi-targeting:** net8.0, net9.0, net10.0. `IsAotCompatible` is `true` (AOT, trim and single-file analyzers run on every target).
+**Multi-targeting:** net8.0, net9.0, net10.0, net11.0. `IsAotCompatible` is `true` (AOT, trim and single-file analyzers run on every target).
 
 **Package validation:** `EnablePackageValidation = true` with `PackageValidationBaselineVersion` currently `0.1.0-preview.0.4.0` (bumped after each release by the nuget-publish workflow). Breaking API changes against the baseline fail the build.
 
