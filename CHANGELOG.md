@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-preview.1.0.0] - 2026-11-11
+
+### Added
+
+- Add the `net11.0` target framework.
+
+### Changed
+
+- Run tests and CI on .NET 11; the build workflow installs only the .NET 11 SDK.
+- Bump `Pure.Primitives` from 3.7.0 to 3.8.0.
+- Bump `Pure.Primitives.Abstractions` from 4.3.0 to 4.4.0.
+- Bump `Pure.Primitives.Choices` from 1.3.0 to 1.4.0.
+- Bump `Pure.Primitives.String.Operations` from 1.7.0 to 1.8.0.
+- Bump `Pure.Primitives.Switches` from 1.2.0 to 2.0.0.
+- Bump `Pure.RelationalSchema` from 2.1.0 to 2.2.0.
+- Bump `Pure.RelationalSchema.HashCodes` from 3.3.0 to 3.4.0.
+
 ## [0.1.0-preview.0.4.0] - 2026-10-23
 
 ### Changed
